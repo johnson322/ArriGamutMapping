@@ -1,0 +1,1417 @@
+Group {
+ name ArriGamutMapping_v02_
+ tile_color 0x80ff
+ label "\[value outputGamut]"
+ selected true
+ xpos -542
+ ypos 265
+ addUserKnob {20 User}
+ addUserKnob {41 readValuesFromMetadata l "read values from metadata" T ArriToNative_L_v01_.readValuesFromMetadata}
+ addUserKnob {26 ARRIconversionValuestext l "ARRI White Balance Settings"}
+ addUserKnob {41 wb l "<font color=orange>white balance (K)" T ArriToNative_L_v01_.wb}
+ addUserKnob {41 tint l "<font color=green>tint" T ArriToNative_L_v01_.tint}
+ addUserKnob {26 ""}
+ addUserKnob {41 outputGamut l "Target Gamut" T GamutConversion2.outputGamut}
+}
+ Input {
+  inputs 0
+  name AP0
+  xpos -842
+  ypos -49
+ }
+ Dot {
+  name Dot8
+  xpos -806
+  ypos 34
+ }
+set N11caf9c0 [stack 0]
+ Group {
+  name GamutConversion2
+  tile_color 0x2f2fffff
+  label "\[value inputGamut]\n\[value outputGamut]"
+  selected true
+  xpos -842
+  ypos 58
+  addUserKnob {20 User l "Gamut Convert"}
+  addUserKnob {4 inputGamut l "Input Gamut" M {"ACES2065-1 (AP0)" "ACEScg (AP1)" "Alexa Wide Gamut" "RED Wide Gamut" "Canon Cinema Gamut" "Rec.709 / sRGB" Rec.2020 "Sony S-Gamut" "Sony S-Gamut3" "Sony S-Gamut3 Cine" "Panisonic V-Gamut" DCI-P3 DCI-P3+ "RED DRAGONcolor" "RED DRAGONcolor2" REDcolor REDcolor2 REDcolor3 REDcolor4 "GoPro Protune Native" ""}}
+  addUserKnob {4 outputGamut l "Output Gamut" M {"ACES2065-1 (AP0)" "ACEScg (AP1)" "Alexa Wide Gamut" "RED Wide Gamut" "Canon Cinema Gamut" "Rec.709 / sRGB" Rec.2020 "Sony S-Gamut" "Sony S-Gamut3" "Sony S-Gamut3 Cine" "Panisonic V-Gamut" DCI-P3 DCI-P3+ "RED DRAGONcolor" "RED DRAGONcolor2" REDcolor REDcolor2 REDcolor3 REDcolor4 "GoPro Protune Native" ""}}
+  outputGamut "ACEScg (AP1)"
+  addUserKnob {22 swap l "swap in/out" T "self = nuke.thisNode()\ninGamut = self\['inputGamut'].value() \noutGamut = self\['outputGamut'].value() \nself\['inputGamut'].setValue(outGamut)\nself\['outputGamut'].setValue(inGamut)\n" +STARTLINE}
+ }
+  Input {
+   inputs 0
+   name Input1
+   xpos 958
+   ypos -210
+  }
+  Dot {
+   name Dot1
+   xpos 994
+   ypos -86
+  }
+set N11cc5460 [stack 0]
+  ColorMatrix {
+   matrix {
+       {0.5022572 0.2929667 0.155232}
+       {0.1387998 0.9108415 -0.0496412}
+       {0.0780143 -0.3148325 1.325876}
+     }
+   name Protune_to_XYZ
+   xpos 1958
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4443178 0.3096293 0.1965088}
+       {0.2088066 0.7220385 0.0691549}
+       {-0.0207319 0.0151468 1.0946428}
+     }
+   name REDcolor4_to_XYZ
+   xpos 1858
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4798631 0.3343988 0.136194}
+       {0.2255112 0.7798001 -0.0053113}
+       {-0.0223911 0.0163586 1.0950902}
+     }
+   name REDcolor3_to_XYZ
+   xpos 1758
+   ypos 191
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4495776 0.3734296 0.1274487}
+       {0.1657103 0.8636625 -0.0293727}
+       {-0.114314 0.0244002 1.1789715}
+     }
+   name REDcolor2_to_XYZ
+   xpos 1658
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4230233 0.3621073 0.1653253}
+       {0.1992334 0.7575963 0.0431703}
+       {-0.0188501 0.0921223 1.0157856}
+     }
+   name REDcolor_to_XYZ
+   xpos 1558
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4385625 0.3072021 0.2046913}
+       {0.1909715 0.7375309 0.0714976}
+       {-0.0514559 -0.0031012 1.1436149}
+     }
+   name DRAGONcolor2_to_XYZ
+   xpos 1458
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4983191 0.3490593 0.1030775}
+       {0.2169922 0.8380223 -0.0550145}
+       {-0.0584666 -0.0035233 1.1510476}
+     }
+   name DRAGONcolor_to_XYZ
+   xpos 1358
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.5757134 0.2684173 0.1063252}
+       {0.2126777 0.8647718 -0.0774496}
+       {-0.007606 -0.0092384 1.1059022}
+     }
+   name DCIP3plus_to_XYZ
+   xpos 1258
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4592517 0.2957918 0.1954125}
+       {0.2151505 0.7091336 0.0757159}
+       {0.000272 0.0469395 1.0418462}
+     }
+   name DCIP3_XYZ
+   xpos 1158
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.6796445 0.1522114 0.1186}
+       {0.2606856 0.7748945 -0.03558}
+       {-0.0093102 -0.0046125 1.1029804}
+     }
+   name VGamut_to_XYZ
+   xpos 1058
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.5990839 0.2489255 0.1024465}
+       {0.2150758 0.8850685 -0.1001443}
+       {-0.0320658 -0.0276584 1.148782}
+     }
+   name SGamut3cine_to_XYZ1
+   xpos 958
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.7064827 0.128801 0.1151722}
+       {0.2709797 0.7866064 -0.0575861}
+       {-0.0096778 0.0046 1.0941356}
+     }
+   name SGamut3_to_XYZ
+   xpos 858
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.7064827 0.128801 0.1151722}
+       {0.2709797 0.7866064 -0.0575861}
+       {-0.0096778 0.0046 1.0941356}
+     }
+   name SGamut_to_XYZ
+   xpos 758
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.636958 0.1446169 0.168881}
+       {0.2627002 0.6779981 0.0593017}
+       {0 0.0280727 1.0609851}
+     }
+   name rec2020_to_XYZ
+   xpos 658
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.4123908 0.3575843 0.1804808}
+       {0.212639 0.7151687 0.0721923}
+       {0.0193308 0.1191948 0.9505322}
+     }
+   name sRGB_XYZ
+   xpos 558
+   ypos 190
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.71603649 0.12968185 0.10471021}
+       {0.26125656 0.86963121 -0.13088776}
+       {-0.00967617 -0.23647866 1.3350552}
+     }
+   name CCG_to_XYZ
+   xpos 458
+   ypos 191
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.735275 0.068609 0.146571}
+       {0.286694 0.842979 -0.129673}
+       {-0.079681 -0.347343 1.516082}
+     }
+   name RWG_XYZ
+   xpos 358
+   ypos 191
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.638008 0.214704 0.0977445}
+       {0.291954 0.823841 -0.115795}
+       {0.0027983 -0.0670342 1.15329}
+     }
+   name AWG_XYZ
+   xpos 258
+   ypos 191
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.6522375 0.1282361 0.1699822}
+       {0.2676722 0.67434 0.0579878}
+       {-0.0053818 0.0013691 1.0930705}
+     }
+   name AP1_XYZ
+   xpos 158
+   ypos 191
+  }
+push $N11cc5460
+  ColorMatrix {
+   matrix {
+       {0.9382798 -0.0044514 0.0166275}
+       {0.3373689 0.7295216 -0.0668905}
+       {0.001174 -0.0037107 1.0915945}
+     }
+   name AP0_to_XYZ
+   xpos 58
+   ypos 191
+  }
+  Switch {
+   inputs 20
+   which {{parent.inputGamut}}
+   name XYZ_65
+   xpos 958
+   ypos 391
+  }
+set N11db83b0 [stack 0]
+  ColorMatrix {
+   matrix {
+       {0.5022572 0.2929667 0.155232}
+       {0.1387998 0.9108415 -0.0496412}
+       {0.0780143 -0.3148325 1.325876}
+     }
+   invert true
+   name Protune_to_XYZ_inv
+   xpos 1958
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4443178 0.3096293 0.1965088}
+       {0.2088066 0.7220385 0.0691549}
+       {-0.0207319 0.0151468 1.0946428}
+     }
+   invert true
+   name REDcolor4_to_XYZ_inv
+   xpos 1858
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4798631 0.3343988 0.136194}
+       {0.2255112 0.7798001 -0.0053113}
+       {-0.0223911 0.0163586 1.0950902}
+     }
+   invert true
+   name REDcolor3_to_XYZ_inv
+   xpos 1758
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4495776 0.3734296 0.1274487}
+       {0.1657103 0.8636625 -0.0293727}
+       {-0.114314 0.0244002 1.1789715}
+     }
+   invert true
+   name REDcolor2_to_XYZ_inv
+   xpos 1658
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4230233 0.3621073 0.1653253}
+       {0.1992334 0.7575963 0.0431703}
+       {-0.0188501 0.0921223 1.0157856}
+     }
+   invert true
+   name REDcolor_to_XYZ_inv
+   xpos 1558
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4385625 0.3072021 0.2046913}
+       {0.1909715 0.7375309 0.0714976}
+       {-0.0514559 -0.0031012 1.1436149}
+     }
+   invert true
+   name DRAGONcolor2_to_XYZ_inv
+   xpos 1458
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4983191 0.3490593 0.1030775}
+       {0.2169922 0.8380223 -0.0550145}
+       {-0.0584666 -0.0035233 1.1510476}
+     }
+   invert true
+   name DRAGONcolor_to_XYZ_inv
+   xpos 1358
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.5757134 0.2684173 0.1063252}
+       {0.2126777 0.8647718 -0.0774496}
+       {-0.007606 -0.0092384 1.1059022}
+     }
+   invert true
+   name DCIP3plus_to_XYZ_inv
+   xpos 1258
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4592517 0.2957918 0.1954125}
+       {0.2151505 0.7091336 0.0757159}
+       {0.000272 0.0469395 1.0418462}
+     }
+   invert true
+   name DCIP3_XYZ_inv
+   xpos 1158
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.6796445 0.1522114 0.1186}
+       {0.2606856 0.7748945 -0.03558}
+       {-0.0093102 -0.0046125 1.1029804}
+     }
+   invert true
+   name VGamut_to_XYZ_inv
+   xpos 1058
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.5990839 0.2489255 0.1024465}
+       {0.2150758 0.8850685 -0.1001443}
+       {-0.0320658 -0.0276584 1.148782}
+     }
+   invert true
+   name SGamut3cine_to_XYZ_inv1
+   xpos 958
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.7064827 0.128801 0.1151722}
+       {0.2709797 0.7866064 -0.0575861}
+       {-0.0096778 0.0046 1.0941356}
+     }
+   invert true
+   name SGamut3_to_XYZ_inv
+   xpos 858
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.7064827 0.128801 0.1151722}
+       {0.2709797 0.7866064 -0.0575861}
+       {-0.0096778 0.0046 1.0941356}
+     }
+   invert true
+   name SGamut_to_XYZ_inv
+   xpos 758
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.636958 0.1446169 0.168881}
+       {0.2627002 0.6779981 0.0593017}
+       {0 0.0280727 1.0609851}
+     }
+   invert true
+   name rec2020_to_XYZ_inv
+   xpos 658
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.4123908 0.3575843 0.1804808}
+       {0.212639 0.7151687 0.0721923}
+       {0.0193308 0.1191948 0.9505322}
+     }
+   invert true
+   name sRGB_XYZ_inv
+   xpos 558
+   ypos 510
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.71603649 0.12968185 0.10471021}
+       {0.26125656 0.86963121 -0.13088776}
+       {-0.00967617 -0.23647866 1.3350552}
+     }
+   invert true
+   name CCG_to_XYZ_inv
+   xpos 458
+   ypos 511
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.735275 0.068609 0.146571}
+       {0.286694 0.842979 -0.129673}
+       {-0.079681 -0.347343 1.516082}
+     }
+   invert true
+   name RWG_XYZ_inv
+   xpos 358
+   ypos 511
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.638008 0.214704 0.097744}
+       {0.291954 0.823841 -0.115795}
+       {0.002798 -0.067034 1.153294}
+     }
+   invert true
+   name AWG_XYZ_inv
+   xpos 258
+   ypos 511
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.6522375 0.1282361 0.1699822}
+       {0.2676722 0.67434 0.0579878}
+       {-0.0053818 0.0013691 1.0930705}
+     }
+   invert true
+   name AP1_XYZ_inv
+   xpos 158
+   ypos 511
+  }
+push $N11db83b0
+  ColorMatrix {
+   matrix {
+       {0.9382798 -0.0044514 0.0166275}
+       {0.3373689 0.7295216 -0.0668905}
+       {0.001174 -0.0037107 1.0915945}
+     }
+   invert true
+   name AP0_to_XYZ_inv
+   xpos 58
+   ypos 511
+  }
+  Switch {
+   inputs 20
+   which {{parent.outputGamut}}
+   name Switch1
+   xpos 958
+   ypos 671
+  }
+  Output {
+   name Output1
+   xpos 958
+   ypos 830
+  }
+  Dot {
+   inputs 0
+   name Dot2
+   label "Each input color space is chromatically adapted into XYZ-D65 using the bradford matrix"
+   note_font_size 30
+   xpos 1294
+   ypos 394
+   hide_input true
+  }
+ end_group
+ Dot {
+  name Dot4
+  xpos -806
+  ypos 154
+ }
+set N11ec0be0 [stack 0]
+ Dot {
+  name Dot1
+  note_font "Helvetica Bold Bold Bold"
+  note_font_size 24
+  note_font_color 0xff
+  xpos -706
+  ypos 154
+ }
+set N10c14450 [stack 0]
+ Dot {
+  name Dot2
+  note_font "Helvetica Bold Bold Bold"
+  note_font_size 24
+  note_font_color 0xff
+  xpos -606
+  ypos 154
+ }
+ Expression {
+  channel0 {rgba.red rgba.green rgba.blue none}
+  expr0 max(r,g,b)
+  name achromatic
+  note_font Helvetica
+  xpos -642
+  ypos 191
+ }
+ Dot {
+  name Dot10
+  xpos -606
+  ypos 274
+ }
+set N70c9ab0 [stack 0]
+push $N10c14450
+ Merge2 {
+  inputs 2
+  operation minus
+  bbox B
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge1
+  note_font Helvetica
+  xpos -742
+  ypos 271
+ }
+push $N70c9ab0
+ Dot {
+  name Dot5
+  note_font "Helvetica Bold Bold Bold"
+  note_font_size 24
+  note_font_color 0xff
+  xpos -606
+  ypos 314
+ }
+ Merge2 {
+  inputs 2
+  operation divide
+  bbox B
+  Achannels rgb
+  Bchannels rgb
+  output rgb
+  name Merge2
+  note_font Helvetica
+  xpos -742
+  ypos 311
+ }
+ Dot {
+  name Dot11
+  xpos -706
+  ypos 514
+ }
+set N7581a290 [stack 0]
+ Dot {
+  name Dot9
+  xpos -706
+  ypos 594
+ }
+set N1c8148a0 [stack 0]
+ Dot {
+  name Dot7
+  xpos -706
+  ypos 674
+ }
+push $N11caf9c0
+ Dot {
+  name Dot3
+  xpos -906
+  ypos 34
+ }
+ Group {
+  name ArriToNative_L_v01_
+  tile_color 0x4aefff
+  gl_color 0xff
+  note_font "DejaVu Sans"
+  xpos -942
+  ypos 310
+  addUserKnob {20 ARRItoNative}
+  addUserKnob {41 inputGamut l "Input Gamut" T GamutConversion2.inputGamut}
+  addUserKnob {26 ""}
+  addUserKnob {22 readValuesFromMetadata l "read values from metadata" T "#Creates dictionaries for all known white balance oand tint metadata keys\nwbDict = \{ \n    'arri/camera/WhiteBalanceKelvin' : '',\n    'exr/interim.camera.wbKelvin' : '', \n    'exr/white_balance_kelvin' : '', \n    'exr/White Balance' : '', \n    'exr/WhiteBalance' : '', \n    'exr/arriWhiteBalance' : '', \n    'exr/codex.WhiteBalance' : '', \n    'exr/ARRIColorTemp' : '', \n    'exr/ColorTemp' : '', \n    'exr/Deluxe_ColorTemp' : ''\n     \}\ntintDict = \{ \n    'arri/camera/WhiteBalanceTintCc' : '', \n    'exr/white_balance_tint' : '', \n    'exr/GreenTintFactor' : '', \n    'exr/Tint' : '', \n    'exr/arriGreenTintFactor' : '', \n    'exr/codex.GreenTint' : '', \n    'exr/com.arri.camera.WbTintCc' : '' \n    \}\n    \nnode = nuke.thisNode()\nwbKnob = 'wb'\ntintKnob = 'tint' \n  \n\n#Does some stuff\ndef execute():\n    if node.input(0):\n        wbDictF = gatherValues(wbDict)\n        tintDictF = gatherValues(tintDict)\n        wbDictT = trimDict(wbDict,'wbDict') \n        tintDictT = trimDict(tintDict,'tintDict') \n        evaluate(wbKnob,wbDictT,wbDictF)\n        evaluate(tintKnob,tintDictT,tintDictF)\n        if not wbDictT:\n            nuke.message('No metadata found')\n    else:\n        nuke.message('Nothing connected to the ARRI input')  \n        pass                  \n\n#Gathers any found values found for the known keys and add them to the dictionary.\ndef gatherValues(Dict1):\n    for key in Dict1:\n        value = node.input(0).metadata(key)\n        Dict1\[key] = value\n    output = \{k: v for k, v in Dict1.items() if v is not None\}\n    Dict1.clear()\n    Dict1.update(output)\n    for key in Dict1:\n        Dict1\[key] = int(float(Dict1\[key]))\n    return Dict1\n\n#Removes metadata entries that have the same values.\ndef trimDict(Dict2,which):\n    trimmedDict = \{\}\n    for key,value in Dict2.items():\n        if value not in trimmedDict.values():\n            trimmedDict\[key] = value\n    print which\n    print trimmedDict\n    if which == 'wbDict':\n        trimmedDict = \{k: v for k, v in trimmedDict.iteritems() if v != 0 \}        \n        print trimmedDict\n        return trimmedDict\n#Creates a popup if more than one metadata value is found.\ndef createPanel(Dict3):\n    valueList = \[0]\n    panel = nuke.Panel('More than one value found!')\n    panel.addButton('Cancel')\n    for item in Dict3:\n        panel.addButton((\"\{\}: \{\}\".format(item, Dict3\[item])))\n        valueList.append(Dict3\[item])\n    output = valueList\[panel.show()]\n    return output\n\n#Applies knob values and creates the dialog if more than one value is found.  This includes the complete list of found key/value combinations.\ndef evaluate(knob,Dict4,Dict5):\n    if not Dict4:\n        return\n    elif len(Dict4) > 1:\n        value = createPanel(Dict5)\n        if value:\n            node\[knob].setValue(value)\n    else:\n        node\[knob].setValue(list(Dict4.values())\[0])\n\nexecute()" +STARTLINE}
+  addUserKnob {26 ARRIconversionValuestext l "ARRI White Balance Settings"}
+  addUserKnob {41 wb l "<font color=orange>white balance (K)" t "Metadata values state what the camera was set to when recording but not what was used during the plate's debayer.  Usually these are not changed during debayer, but it's possible for them to be adjusted upon conversion." T cntrl.wb}
+  addUserKnob {41 tint l "<font color=green>tint" t "Metadata values state what the camera was set to when recording but not what was used during the plate's debayer.  Usually these are not changed during debayer, but it's possible for them to be adjusted upon conversion." T cntrl.tint}
+  addUserKnob {26 ""}
+  addUserKnob {6 whiteBalanceNative l "native white balance" +STARTLINE}
+ }
+  Input {
+   inputs 0
+   name AP0
+   label "input \[value number]"
+   xpos 458
+   ypos 145
+  }
+  Group {
+   name GamutConversion2
+   tile_color 0x2f2fffff
+   label "\[value inputGamut]\n\[value outputGamut]"
+   xpos 458
+   ypos 299
+   addUserKnob {20 User l "Gamut Convert"}
+   addUserKnob {4 inputGamut l "Input Gamut" M {"ACES2065-1 (AP0)" "ACEScg (AP1)" "Alexa Wide Gamut" "RED Wide Gamut" "Canon Cinema Gamut" "Rec.709 / sRGB" Rec.2020 "Sony S-Gamut" "Sony S-Gamut3" "Sony S-Gamut3 Cine" "Panisonic V-Gamut" DCI-P3 DCI-P3+ "RED DRAGONcolor" "RED DRAGONcolor2" REDcolor REDcolor2 REDcolor3 REDcolor4 "GoPro Protune Native" ""}}
+   addUserKnob {4 outputGamut l "Output Gamut" M {"ACES2065-1 (AP0)" "ACEScg (AP1)" "Alexa Wide Gamut" "RED Wide Gamut" "Canon Cinema Gamut" "Rec.709 / sRGB" Rec.2020 "Sony S-Gamut" "Sony S-Gamut3" "Sony S-Gamut3 Cine" "Panisonic V-Gamut" DCI-P3 DCI-P3+ "RED DRAGONcolor" "RED DRAGONcolor2" REDcolor REDcolor2 REDcolor3 REDcolor4 "GoPro Protune Native" ""}}
+   outputGamut "Alexa Wide Gamut"
+   addUserKnob {22 swap l "swap in/out" T "self = nuke.thisNode()\ninGamut = self\['inputGamut'].value() \noutGamut = self\['outputGamut'].value() \nself\['inputGamut'].setValue(outGamut)\nself\['outputGamut'].setValue(inGamut)\n" +STARTLINE}
+  }
+   Input {
+    inputs 0
+    name Input1
+    xpos 958
+    ypos -210
+   }
+   Dot {
+    name Dot1
+    xpos 994
+    ypos -86
+   }
+set N11f1fd30 [stack 0]
+   ColorMatrix {
+    matrix {
+        {0.5022572 0.2929667 0.155232}
+        {0.1387998 0.9108415 -0.0496412}
+        {0.0780143 -0.3148325 1.325876}
+      }
+    name Protune_to_XYZ
+    xpos 1958
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4443178 0.3096293 0.1965088}
+        {0.2088066 0.7220385 0.0691549}
+        {-0.0207319 0.0151468 1.0946428}
+      }
+    name REDcolor4_to_XYZ
+    xpos 1858
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4798631 0.3343988 0.136194}
+        {0.2255112 0.7798001 -0.0053113}
+        {-0.0223911 0.0163586 1.0950902}
+      }
+    name REDcolor3_to_XYZ
+    xpos 1758
+    ypos 191
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4495776 0.3734296 0.1274487}
+        {0.1657103 0.8636625 -0.0293727}
+        {-0.114314 0.0244002 1.1789715}
+      }
+    name REDcolor2_to_XYZ
+    xpos 1658
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4230233 0.3621073 0.1653253}
+        {0.1992334 0.7575963 0.0431703}
+        {-0.0188501 0.0921223 1.0157856}
+      }
+    name REDcolor_to_XYZ
+    xpos 1558
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4385625 0.3072021 0.2046913}
+        {0.1909715 0.7375309 0.0714976}
+        {-0.0514559 -0.0031012 1.1436149}
+      }
+    name DRAGONcolor2_to_XYZ
+    xpos 1458
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4983191 0.3490593 0.1030775}
+        {0.2169922 0.8380223 -0.0550145}
+        {-0.0584666 -0.0035233 1.1510476}
+      }
+    name DRAGONcolor_to_XYZ
+    xpos 1358
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.5757134 0.2684173 0.1063252}
+        {0.2126777 0.8647718 -0.0774496}
+        {-0.007606 -0.0092384 1.1059022}
+      }
+    name DCIP3plus_to_XYZ
+    xpos 1258
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4592517 0.2957918 0.1954125}
+        {0.2151505 0.7091336 0.0757159}
+        {0.000272 0.0469395 1.0418462}
+      }
+    name DCIP3_XYZ
+    xpos 1158
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.6796445 0.1522114 0.1186}
+        {0.2606856 0.7748945 -0.03558}
+        {-0.0093102 -0.0046125 1.1029804}
+      }
+    name VGamut_to_XYZ
+    xpos 1058
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.5990839 0.2489255 0.1024465}
+        {0.2150758 0.8850685 -0.1001443}
+        {-0.0320658 -0.0276584 1.148782}
+      }
+    name SGamut3cine_to_XYZ1
+    xpos 958
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.7064827 0.128801 0.1151722}
+        {0.2709797 0.7866064 -0.0575861}
+        {-0.0096778 0.0046 1.0941356}
+      }
+    name SGamut3_to_XYZ
+    xpos 858
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.7064827 0.128801 0.1151722}
+        {0.2709797 0.7866064 -0.0575861}
+        {-0.0096778 0.0046 1.0941356}
+      }
+    name SGamut_to_XYZ
+    xpos 758
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.636958 0.1446169 0.168881}
+        {0.2627002 0.6779981 0.0593017}
+        {0 0.0280727 1.0609851}
+      }
+    name rec2020_to_XYZ
+    xpos 658
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.4123908 0.3575843 0.1804808}
+        {0.212639 0.7151687 0.0721923}
+        {0.0193308 0.1191948 0.9505322}
+      }
+    name sRGB_XYZ
+    xpos 558
+    ypos 190
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.71603649 0.12968185 0.10471021}
+        {0.26125656 0.86963121 -0.13088776}
+        {-0.00967617 -0.23647866 1.3350552}
+      }
+    name CCG_to_XYZ
+    xpos 458
+    ypos 191
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.735275 0.068609 0.146571}
+        {0.286694 0.842979 -0.129673}
+        {-0.079681 -0.347343 1.516082}
+      }
+    name RWG_XYZ
+    xpos 358
+    ypos 191
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.638008 0.214704 0.0977445}
+        {0.291954 0.823841 -0.115795}
+        {0.0027983 -0.0670342 1.15329}
+      }
+    name AWG_XYZ
+    xpos 258
+    ypos 191
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.6522375 0.1282361 0.1699822}
+        {0.2676722 0.67434 0.0579878}
+        {-0.0053818 0.0013691 1.0930705}
+      }
+    name AP1_XYZ
+    xpos 158
+    ypos 191
+   }
+push $N11f1fd30
+   ColorMatrix {
+    matrix {
+        {0.9382798 -0.0044514 0.0166275}
+        {0.3373689 0.7295216 -0.0668905}
+        {0.001174 -0.0037107 1.0915945}
+      }
+    name AP0_to_XYZ
+    xpos 58
+    ypos 191
+   }
+   Switch {
+    inputs 20
+    which {{parent.inputGamut}}
+    name XYZ_65
+    xpos 958
+    ypos 391
+   }
+set N12012c90 [stack 0]
+   ColorMatrix {
+    matrix {
+        {0.5022572 0.2929667 0.155232}
+        {0.1387998 0.9108415 -0.0496412}
+        {0.0780143 -0.3148325 1.325876}
+      }
+    invert true
+    name Protune_to_XYZ_inv
+    xpos 1958
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4443178 0.3096293 0.1965088}
+        {0.2088066 0.7220385 0.0691549}
+        {-0.0207319 0.0151468 1.0946428}
+      }
+    invert true
+    name REDcolor4_to_XYZ_inv
+    xpos 1858
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4798631 0.3343988 0.136194}
+        {0.2255112 0.7798001 -0.0053113}
+        {-0.0223911 0.0163586 1.0950902}
+      }
+    invert true
+    name REDcolor3_to_XYZ_inv
+    xpos 1758
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4495776 0.3734296 0.1274487}
+        {0.1657103 0.8636625 -0.0293727}
+        {-0.114314 0.0244002 1.1789715}
+      }
+    invert true
+    name REDcolor2_to_XYZ_inv
+    xpos 1658
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4230233 0.3621073 0.1653253}
+        {0.1992334 0.7575963 0.0431703}
+        {-0.0188501 0.0921223 1.0157856}
+      }
+    invert true
+    name REDcolor_to_XYZ_inv
+    xpos 1558
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4385625 0.3072021 0.2046913}
+        {0.1909715 0.7375309 0.0714976}
+        {-0.0514559 -0.0031012 1.1436149}
+      }
+    invert true
+    name DRAGONcolor2_to_XYZ_inv
+    xpos 1458
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4983191 0.3490593 0.1030775}
+        {0.2169922 0.8380223 -0.0550145}
+        {-0.0584666 -0.0035233 1.1510476}
+      }
+    invert true
+    name DRAGONcolor_to_XYZ_inv
+    xpos 1358
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.5757134 0.2684173 0.1063252}
+        {0.2126777 0.8647718 -0.0774496}
+        {-0.007606 -0.0092384 1.1059022}
+      }
+    invert true
+    name DCIP3plus_to_XYZ_inv
+    xpos 1258
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4592517 0.2957918 0.1954125}
+        {0.2151505 0.7091336 0.0757159}
+        {0.000272 0.0469395 1.0418462}
+      }
+    invert true
+    name DCIP3_XYZ_inv
+    xpos 1158
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.6796445 0.1522114 0.1186}
+        {0.2606856 0.7748945 -0.03558}
+        {-0.0093102 -0.0046125 1.1029804}
+      }
+    invert true
+    name VGamut_to_XYZ_inv
+    xpos 1058
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.5990839 0.2489255 0.1024465}
+        {0.2150758 0.8850685 -0.1001443}
+        {-0.0320658 -0.0276584 1.148782}
+      }
+    invert true
+    name SGamut3cine_to_XYZ_inv1
+    xpos 958
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.7064827 0.128801 0.1151722}
+        {0.2709797 0.7866064 -0.0575861}
+        {-0.0096778 0.0046 1.0941356}
+      }
+    invert true
+    name SGamut3_to_XYZ_inv
+    xpos 858
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.7064827 0.128801 0.1151722}
+        {0.2709797 0.7866064 -0.0575861}
+        {-0.0096778 0.0046 1.0941356}
+      }
+    invert true
+    name SGamut_to_XYZ_inv
+    xpos 758
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.636958 0.1446169 0.168881}
+        {0.2627002 0.6779981 0.0593017}
+        {0 0.0280727 1.0609851}
+      }
+    invert true
+    name rec2020_to_XYZ_inv
+    xpos 658
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.4123908 0.3575843 0.1804808}
+        {0.212639 0.7151687 0.0721923}
+        {0.0193308 0.1191948 0.9505322}
+      }
+    invert true
+    name sRGB_XYZ_inv
+    xpos 558
+    ypos 510
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.71603649 0.12968185 0.10471021}
+        {0.26125656 0.86963121 -0.13088776}
+        {-0.00967617 -0.23647866 1.3350552}
+      }
+    invert true
+    name CCG_to_XYZ_inv
+    xpos 458
+    ypos 511
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.735275 0.068609 0.146571}
+        {0.286694 0.842979 -0.129673}
+        {-0.079681 -0.347343 1.516082}
+      }
+    invert true
+    name RWG_XYZ_inv
+    xpos 358
+    ypos 511
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.638008 0.214704 0.097744}
+        {0.291954 0.823841 -0.115795}
+        {0.002798 -0.067034 1.153294}
+      }
+    invert true
+    name AWG_XYZ_inv
+    xpos 258
+    ypos 511
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.6522375 0.1282361 0.1699822}
+        {0.2676722 0.67434 0.0579878}
+        {-0.0053818 0.0013691 1.0930705}
+      }
+    invert true
+    name AP1_XYZ_inv
+    xpos 158
+    ypos 511
+   }
+push $N12012c90
+   ColorMatrix {
+    matrix {
+        {0.9382798 -0.0044514 0.0166275}
+        {0.3373689 0.7295216 -0.0668905}
+        {0.001174 -0.0037107 1.0915945}
+      }
+    invert true
+    name AP0_to_XYZ_inv
+    xpos 58
+    ypos 511
+   }
+   Switch {
+    inputs 20
+    which {{parent.outputGamut}}
+    name Switch1
+    xpos 958
+    ypos 671
+   }
+   Output {
+    name Output1
+    xpos 958
+    ypos 830
+   }
+   Dot {
+    inputs 0
+    name Dot2
+    label "Each input color space is chromatically adapted into XYZ-D65 using the bradford matrix"
+    note_font_size 30
+    xpos 1294
+    ypos 394
+    hide_input true
+   }
+  end_group
+  ColorMatrix {
+   matrix {
+       {{curve(cct) x2000 1.21051 x2100 1.202154 1.195132 x2400 1.184217 1.176497 x2900 1.169237 1.165689 1.164751 x3900 1.166292 1.162697 1.165366 1.169736 x5600 1.176639 x6500 1.19076 x7500 1.206597 x9000 1.227895 x11000 1.250764} {curve(cct) x2000 -0.262282 x2100 -0.252435 -0.243392 x2400 -0.227449 -0.213934 x2900 -0.197282 -0.184001 -0.173288 x3900 -0.162017 -0.142148 -0.132799 -0.125665 x5600 -0.119021 x6500 -0.111827 x7500 -0.106314 x9000 -0.102511 x11000 -0.100372} {curve(cct) x2000 0.051773 x2100 0.050281 0.048261 x2400 0.043233 0.037437 x2900 0.028045 0.018311 0.008537 x3900 -0.004275 -0.020548 -0.032567 -0.044071 x5600 -0.057618 x6500 -0.078933 x7500 -0.100283 x9000 -0.125383 x11000 -0.150393}}
+       {{curve(cct) x2000 -0.121371 x2100 -0.110522 -0.101274 x2400 -0.086385 -0.074943 x2900 -0.062025 -0.052436 -0.045025 x3900 -0.037402 -0.032953 -0.027832 -0.023631 x5600 -0.019367 x6500 -0.013774 x7500 -0.009227 x9000 -0.00482 x11000 -0.001199} {curve(cct) x2000 1.051117 x2100 1.039042 1.030202 x2400 1.019161 1.01387 x2900 1.012171 1.014726 1.019609 x3900 1.028012 1.031553 1.040165 1.049208 x5600 1.06057 x6500 1.07954 x7500 1.099353 x9000 1.123352 x11000 1.147714} {curve(cct) x2000 0.070254 x2100 0.07148 0.071073 x2400 0.067224 0.061073 x2900 0.049854 0.037709 0.025416 x3900 0.00939 0.001399 -0.012334 -0.025577 x5600 -0.041202 x6500 -0.065767 x7500 -0.090126 x9000 -0.118532 x11000 -0.146515}}
+       {{curve(cct) x2000 0.001944 x2100 0.007013 0.010983 x2400 0.016703 0.020564 x2900 0.02444 0.027069 0.029018 x3900 0.031011 0.032608 0.034112 0.035391 x5600 0.036749 x6500 0.038524 x7500 0.04035 x9000 0.04216 x11000 0.043813} {curve(cct) x2000 -0.300355 x2100 -0.298648 -0.295148 x2400 -0.285655 -0.275263 x2900 -0.260551 -0.247829 -0.237114 x3900 -0.225453 -0.224601 -0.216134 -0.20909 x5600 -0.201922 x6500 -0.192614 x7500 -0.185178 x9000 -0.178176 x11000 -0.172586} {curve(cct) x2000 1.29841 x2100 1.291635 1.284164 x2400 1.268952 1.254699 x2900 1.236111 1.22076 1.208095 x3900 1.194443 1.191993 1.182022 1.173699 x5600 1.165172 x6500 1.15409 x7500 1.144828 x9000 1.136016 x11000 1.128773}}
+     }
+   invert true
+   name AlexaCCTmatrix_1
+   xpos 458
+   ypos 471
+   addUserKnob {20 User}
+   addUserKnob {7 cct R 2000 11000}
+   cct {{cntrl.wb}}
+  }
+  Grade {
+   channels rgba
+   multiply {{curve(tint) x-8 0.807 x0 1 1.252} 1 {curve(tint) x-8 0.781 x0 1 1.286} 1}
+   reverse true
+   black_clamp false
+   name AlexaTintMultipliers1
+   xpos 458
+   ypos 550
+   addUserKnob {20 User}
+   addUserKnob {7 tint R -8 8}
+   tint {{cntrl.tint}}
+  }
+  Dot {
+   name Dot2
+   xpos 494
+   ypos 594
+  }
+set N12147d30 [stack 0]
+  Dot {
+   name Dot3
+   xpos 894
+   ypos 594
+  }
+set N1214c6a0 [stack 0]
+  Grade {
+   channels rgba
+   multiply {0.924 1 0.936 1}
+   reverse true
+   name TintNegative8_11000_2
+   xpos 958
+   ypos 670
+  }
+push $N1214c6a0
+  Grade {
+   channels rgba
+   multiply {1 1 1 1}
+   reverse true
+   name TintNegative8_3900_2
+   xpos 858
+   ypos 670
+  }
+push 0
+push $N1214c6a0
+  Grade {
+   channels rgba
+   multiply {1.034 1 0.873 1}
+   reverse true
+   name TintNegative8_2300_2
+   xpos 758
+   ypos 670
+  }
+push $N1214c6a0
+  Grade {
+   channels rgba
+   multiply {1.034 1 0.81 1}
+   reverse true
+   name TintNegative8_2000_2
+   xpos 658
+   ypos 670
+  }
+  Dissolve {
+   inputs 4+1
+   which {{curve(cntrl.wb) x2000 0 x2300 1 x3900 2 x11000 3}}
+   name TintNegative8_2
+   xpos 858
+   ypos 704
+  }
+  Dot {
+   name Dot1
+   xpos 894
+   ypos 874
+  }
+push 0
+push $N12147d30
+  NoOp {
+   name cntrl
+   xpos 458
+   ypos 711
+   addUserKnob {20 User}
+   addUserKnob {7 wb R 2000 11000}
+   wb 3200
+   addUserKnob {7 tint R -8 8}
+  }
+push $N12147d30
+  Dot {
+   name Dot6
+   xpos 194
+   ypos 594
+  }
+  Dot {
+   name Dot4
+   xpos 194
+   ypos 634
+  }
+set N1219e680 [stack 0]
+  Grade {
+   channels rgba
+   multiply {1.104 1 0.936 1}
+   reverse true
+   name TintNegative8_11000_3
+   xpos 258
+   ypos 670
+  }
+push $N1219e680
+  Grade {
+   channels rgba
+   multiply {1 1 1 1}
+   reverse true
+   name TintNegative8_3900_3
+   xpos 158
+   ypos 670
+  }
+push 0
+push $N1219e680
+  Grade {
+   channels rgba
+   multiply {0.904 1 1.218 1}
+   reverse true
+   name TintNegative8_2300_3
+   xpos 58
+   ypos 670
+  }
+push $N1219e680
+  Grade {
+   channels rgba
+   multiply {0.95 1 1.408 1}
+   reverse true
+   name TintNegative8_2000_3
+   xpos -42
+   ypos 670
+  }
+  Dissolve {
+   inputs 4+1
+   which {{curve(cntrl.wb) x2000 0 x2300 1 x3900 2 x11000 3}}
+   name TintNegative8_3
+   xpos 158
+   ypos 704
+  }
+  Dot {
+   name Dot5
+   xpos 194
+   ypos 874
+  }
+  Dissolve {
+   inputs 3+1
+   which {{curve(cntrl.tint) x-8 0 x0 1 2}}
+   name Dissolve2
+   xpos 458
+   ypos 865
+  }
+  Grade {
+   channels rgba
+   multiply {{curve(tint) x-8 0.807 x0 1 1.252} 1 {curve(tint) x-8 0.781 x0 1 1.286} 1}
+   black_clamp false
+   name AlexaTintMultipliers2
+   xpos 458
+   ypos 911
+   disable {{abs(whiteBalanceNative-1)}}
+   addUserKnob {20 User}
+   addUserKnob {7 tint R -8 8}
+   tint {{cntrl.tint}}
+  }
+  Grade {
+   channels rgba
+   multiply {{curve(wb) x2000 0.6788 x2100 0.723 0.766 x2400 0.849 0.927 x2900 1.033 1.1282 1.213 x3900 1.312 1.426 x5100 1.574 x5600 1.644962 x6500 1.74583 x7500 1.827 x9000 1.912 x11000 1.986} 1 {curve(wb) x2000 3.59396 x2100 3.374 3.18 x2400 2.85 2.59 x2900 2.292 2.06876 1.897 x3900 1.724 1.646 x5100 1.454 x5600 1.366723 x6500 1.25282 x7500 1.167 x9000 1.082 x11000 1.015} 1}
+   reverse true
+   black_clamp false
+   name AlexaWBmultipliers_1
+   xpos 458
+   ypos 957
+   disable {{abs(whiteBalanceNative-1)}}
+   addUserKnob {20 User}
+   addUserKnob {7 wb R 2000 11000}
+   wb {{cntrl.wb}}
+  }
+  Output {
+   name Output1
+   xpos 458
+   ypos 1230
+  }
+ end_group
+ Dot {
+  name Dot12
+  xpos -906
+  ypos 514
+ }
+set N854bde0 [stack 0]
+ Dot {
+  name Dot13
+  xpos -906
+  ypos 594
+ }
+set N440fb2f0 [stack 0]
+ Dot {
+  name Dot6
+  xpos -906
+  ypos 674
+ }
+push $N1c8148a0
+push $N440fb2f0
+push $N7581a290
+push $N854bde0
+push $N11ec0be0
+ Keymix {
+  inputs 3
+  channels {rgba.red -rgba.green -rgba.blue}
+  maskChannel rgba.red
+  name Keymix1
+  xpos -842
+  ypos 505
+ }
+ Keymix {
+  inputs 3
+  channels {-rgba.red rgba.green -rgba.blue}
+  maskChannel rgba.green
+  name Keymix2
+  xpos -842
+  ypos 585
+ }
+ Keymix {
+  inputs 3
+  channels {-rgba.red -rgba.green rgba.blue}
+  maskChannel rgba.blue
+  name Keymix4
+  xpos -842
+  ypos 665
+ }
+ Output {
+  name Output1
+  xpos -842
+  ypos 791
+ }
+end_group
